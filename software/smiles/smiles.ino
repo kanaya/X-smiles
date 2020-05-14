@@ -26,6 +26,14 @@ const int BAD[] = {
     1,  0,  0,  0,  1,
 };
 
+const int SURPRISE[] = {
+    0,  1,  1,  1,  0,
+  0,  1,  0,  0,  1,  0,
+    1,  0,  0,  0,  1,
+  0,  1,  0,  0,  1,  0,
+    0,  1,  1,  1,  0,
+};
+
 const int SAD[] = {
     0,  1,  0,  1,  0,
   0,  0,  1,  1,  0,  0,
@@ -57,9 +65,9 @@ void loop() {
   delay(2000);
   fade(MAX_VAL, MAX_VAL, 0, BAD, FADE_OUT);
   delay(2000);
-  fade(MAX_VAL, 0, 0, SAD, FADE_IN);
+  fade(MAX_VAL, 0, 0, SURPRISE, FADE_IN);
   delay(2000);
-  fade(MAX_VAL, 0, 0, SAD, FADE_OUT);
+  fade(MAX_VAL, 0, 0, SURPRISE, FADE_OUT);
   delay(2000);
 }
 

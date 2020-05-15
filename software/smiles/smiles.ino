@@ -19,9 +19,9 @@ const int HAPPY[] = {
 };
 
 const int BAD[] = {
-    0,  0,  0,  0,  0,
-  0,  0,  0,  0,  0,  0,
-    0,  1,  1,  1,  0,
+    0,  0,  1,  0,  0,
+  0,  0,  1,  1,  0,  0,
+    0,  1,  0,  1,  0,
   0,  1,  0,  0,  1,  0,
     1,  0,  0,  0,  1,
 };
@@ -68,6 +68,10 @@ void loop() {
   fade(MAX_VAL, 0, 0, SURPRISE, FADE_IN);
   delay(2000);
   fade(MAX_VAL, 0, 0, SURPRISE, FADE_OUT);
+  delay(2000);
+  fade(0, 0, MAX_VAL, SAD, FADE_IN);
+  delay(2000);
+  fade(0, 0, MAX_VAL, SAD, FADE_OUT);
   delay(2000);
 }
 

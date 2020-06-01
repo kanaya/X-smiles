@@ -1,5 +1,8 @@
 #include <Adafruit_NeoPixel.h>
 
+const int SENSOR_PIN = A0;
+const int LED_PIN = 13;
+
 const int MAX_VAL = 64;
 const int N_STEPS = 16;
 const int DELTA = MAX_VAL / N_STEPS;
@@ -52,27 +55,28 @@ const int SAD[] = {
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, NP_PIN, NEO_GRB | NEO_KHZ800);
 
 void setup() {
+  pinMode(LED_PIN, OUTPUT);
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
+  fade(0, MAX_VAL, 0, HAPPY, FADE_IN);
+  digitalWrite(LED_PIN, LOW);
+  Serial.begin(9600);
 }
 
 void loop() {
-  fade(0, MAX_VAL, 0, HAPPY, FADE_IN);
-  delay(2000);
-  fade(0, MAX_VAL, 0, HAPPY, FADE_OUT);
-  delay(2000);
-  fade(MAX_VAL, MAX_VAL, 0, BAD, FADE_IN);
-  delay(2000);
-  fade(MAX_VAL, MAX_VAL, 0, BAD, FADE_OUT);
-  delay(2000);
-  fade(MAX_VAL, 0, 0, SURPRISE, FADE_IN);
-  delay(2000);
-  fade(MAX_VAL, 0, 0, SURPRISE, FADE_OUT);
-  delay(2000);
-  fade(0, 0, MAX_VAL, SAD, FADE_IN);
-  delay(2000);
-  fade(0, 0, MAX_VAL, SAD, FADE_OUT);
-  delay(2000);
+  int sensorValue = 0;
+  sensorValue = analogRead(SENSOR_PIN);
+  Serial.println(sensorValue);
+  if (sensorValue > 100) {
+    digitalWrite(LED_PIN, HIGH);
+    fade(0, MAX_VAL, 0, HAPPY, FADE_OUT);
+    fade(MAX_VAL, MAX_VAL, 0, BAD, FADE_IN);
+    delay(2000);
+    fade(MAX_VAL, MAX_VAL, 0, BAD, FADE_OUT);
+    // delay(2000);
+    fade(0, MAX_VAL, 0, HAPPY, FADE_IN);
+    digitalWrite(LED_PIN, LOW); 
+  }
 }
 
 void clear() {
